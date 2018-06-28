@@ -1,6 +1,6 @@
 {
   "name": "jp-postal",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "postal.json",
   "license": "MIT",
   "scripts": {

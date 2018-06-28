@@ -1,6 +1,6 @@
 # Japanese postal data from official database
 
-There is command to download and rebuild the latest data
+There is instruction to download, rebuild and obtain the latest data from official source
 
 ## Data source and explanation
 
@@ -11,8 +11,9 @@ There is command to download and rebuild the latest data
 ## Usage
 
 - Directly download and use `postal.json`
-- Or install module `jp-postal`: `npm install --save jp-postal` or `yarn add jp-postal`
-- `postal.json` maps 7 digits postal code (string format) into array of exact 2 elements. First element is prefecture name, second element is region name *OR* array of associated regions' name. There are some if not many postal codes associated with multiple regions. For example: postal code `4520961` is associated with 66 regions, 2 regions in different prefectures have same postal code `4980000` (2018 June 28)
+- Or install module `jp-postal` via `npm install --save jp-postal` or `yarn add jp-postal`
+- `postal.json` maps 7 digits postal code (string format) into a map whose key is prefecture name and value is array of regions under the prefecture
+- Some regions have same postal code. For example: postal code `4520961` is associated with 66 regions, 2 regions in different prefectures have same postal code `4980000` (2018 June 28)
 - Usage example:
 
 ```javascript
