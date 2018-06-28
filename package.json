@@ -1,8 +1,20 @@
 {
   "name": "jp-postal",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "main": "postal.json",
   "license": "MIT",
+  "repository": "github:tranvansang/jp-postal",
+  "keywords": [
+    "japanese",
+    "postal",
+    "postal-code",
+    "address",
+    "yubinbango",
+    "郵便番号",
+    "〒",
+    "住所",
+    "日本"
+  ],
   "scripts": {
     "rebuild": "yarn download && yarn unzip && yarn enc-convert && yarn js-convert && yarn test",
     "download": "wget -O ken_all.zip http://www.post.japanpost.jp/zipcode/dl/kogaki/zip/ken_all.zip",
