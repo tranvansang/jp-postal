@@ -1,0 +1,23 @@
+{
+  "name": "jp-postal",
+  "version": "1.0.0",
+  "main": "postal.json",
+  "license": "MIT",
+  "scripts": {
+    "rebuild": "yarn download && yarn unzip && yarn enc-convert && yarn js-convert && yarn test",
+    "download": "wget -O ken_all.zip http://www.post.japanpost.jp/zipcode/dl/kogaki/zip/ken_all.zip",
+    "unzip": "unzip -o ken_all.zip",
+    "enc-convert": "iconv -f sjis -t utf8 KEN_ALL.CSV > KEN_ALL-utf8.CSV",
+    "js-convert": "node convert.js",
+    "test": "yarn mocha test.js"
+  },
+  "dependencies": {
+    "csv": "^3.1.0",
+    "fs": "^0.0.1-security",
+    "path": "^0.12.7"
+  },
+  "devDependencies": {
+    "assert": "^1.4.1",
+    "mocha": "^5.2.0"
+  }
+}
