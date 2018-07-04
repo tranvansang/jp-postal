@@ -2,27 +2,41 @@ const csv = require('csv')
 const fs = require('fs')
 const path = require('path')
 
-fs.readFile(path.resolve(__dirname, 'KEN_ALL-utf8.CSV'), 'utf8', (err, rawString) =>{
+const INPUT_FILENAME = 'KEN_ALL-utf8.CSV'
+const STANDARD_OUTPUT_FILENAME = 'postal.json'
+const EXTENDED_OUTPUT_FILENAME = 'postal-extended.json'
+
+fs.readFile(path.resolve(__dirname, INPUT_FILENAME), 'utf8', (err, rawString) =>{
   if (err) throw err
   csv.parse(rawString, (err, csvData) => {
     if (err) throw err
     const postalData = {}
+    const extendedPostalData = {}
     csvData.forEach(row => {
       const postalCode = row[2]
       if (!/^[0-9]{7}$/.test(postalCode))
         throw new Error(`Postal code ${postalCode} has invalid format`)
       const prefecture = row[6]
-      const region = row[7] + (row[8] === '以下に掲載がない場合' ? '' : row[8])
-      const currentData = postalData[postalCode]
-      if (currentData)
-        postalData[postalCode] = {
-          ...currentData,
-          [prefecture] : [
-            ...(currentData[prefecture] ? currentData[prefecture] : []),
-            region
+      const region = row[7]
+      const subregion = row[8] === '以下に掲載がない場合' ? '' : row[8]
+      const conbinedRegion = region + subregion
+      postalData[postalCode] = {
+        ...(postalData[postalCode] || {}),
+        [prefecture] : [
+          ...(postalData[postalCode] && postalData[postalCode][prefecture] || []),
+          conbinedRegion
+        ]
+      }
+      extendedPostalData[postalCode] = {
+        ...(extendedPostalData[postalCode] || {}),
+        [prefecture]: {
+          ...(extendedPostalData[postalCode] && extendedPostalData[postalCode][prefecture] || {}),
+          [region]: [
+            ...(extendedPostalData[postalCode] && extendedPostalData[postalCode][prefecture] && extendedPostalData[postalCode][prefecture][region] || []),
+            ...(subregion ? [subregion] : [])
           ]
         }
-      else postalData[postalCode] = {[prefecture]: [region]}
+      }
     }, {})
     // Do some statistics
     let maxRegionCount = 0
@@ -47,9 +61,11 @@ fs.readFile(path.resolve(__dirname, 'KEN_ALL-utf8.CSV'), 'utf8', (err, rawString
     console.log(`Postal code ${maxPrefecturePostal} is associated with ${maxPrefectureCount} prefectures`)
     const postalCodeCount = Object.keys(postalData).length
     console.log(`${csvData.length} records has been procceed to obtain ${postalCodeCount} postal code`)
-    fs.writeFile(path.resolve(__dirname, 'postal.json'), JSON.stringify(postalData), err => {
-      if (err)
-        throw err
+    fs.writeFile(path.resolve(__dirname, STANDARD_OUTPUT_FILENAME), JSON.stringify(postalData), err => {
+      if (err) throw err
+    })
+    fs.writeFile(path.resolve(__dirname, EXTENDED_OUTPUT_FILENAME), JSON.stringify(extendedPostalData), err => {
+      if (err) throw err
     })
   })
 })

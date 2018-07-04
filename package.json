@@ -1,7 +1,7 @@
 {
   "name": "jp-postal",
   "version": "1.0.2",
-  "main": "postal.json",
+  "main": "index.js",
   "license": "MIT",
   "repository": "github:tranvansang/jp-postal",
   "keywords": [
@@ -16,7 +16,7 @@
     "日本"
   ],
   "scripts": {
-    "rebuild": "yarn download && yarn unzip && yarn enc-convert && yarn js-convert && yarn test",
+    "rebuild": "yarn install --production=false && yarn download && yarn unzip && yarn enc-convert && yarn js-convert && yarn test",
     "download": "wget -O ken_all.zip http://www.post.japanpost.jp/zipcode/dl/kogaki/zip/ken_all.zip",
     "unzip": "unzip -o ken_all.zip",
     "enc-convert": "iconv -f sjis -t utf8 KEN_ALL.CSV > KEN_ALL-utf8.CSV",
