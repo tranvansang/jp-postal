@@ -9,8 +9,8 @@ if (!process.env.GOOGLE_MAPS_API_KEY) {
   process.exit()
 }
 const key = process.env.GOOGLE_MAPS_API_KEY
-const startIndex = process.env.START_INDEX
-const endIndex = process.env.END_INDEX
+const startIndex = parseInt(process.env.START_INDEX)
+const endIndex = parseInt(process.env.END_INDEX)
 console.log(`From ${startIndex} to ${endIndex}`)
 const errCountMax = 10
 const googleMapsClient = googleMaps.createClient({
@@ -21,17 +21,6 @@ const googleMapsClient = googleMaps.createClient({
 })
 
 const geoFilePath = path.resolve(__dirname, `geo_${startIndex}-${endIndex}.json`)
-
-// const test = async () => {
-//   try {
-//     const response = await googleMapsClient.geocode({address: '東京都荒川区東尾久'}).asPromise()
-//     console.log(response.json.results[0].geometry.location)
-//   } catch (err) {
-//     console.error(err)
-//   }
-// }
-//
-// test().catch(console.error)
 
 let index = 0
 let errCount = 0
@@ -45,7 +34,7 @@ const getGeo = async () => {
         index += 1
         if (index - 1 < startIndex)
           continue
-        if (index - 1 === endIndex)
+        if (index - 1 >= endIndex)
           return geo
         try {
           console.log(`${index - 1} fetch ${postalCode} ${prefecture}${region}...`)
@@ -68,15 +57,11 @@ const getGeo = async () => {
   return geo
 }
 
-getGeo().then(geo =>
-  fs.writeFile(geoFilePath, JSON.stringify(geo), err => {
-    if (err) throw err
-  })
-).catch(console.error)
-/**
- * fetch 1006506 東京都千代田区丸の内新丸の内ビルディング（６階）...
- timeout
- fetch 1006625 東京都千代田区丸の内グラントウキョウサウスタワー（２５階）...
- fetch 1006626 東京都千代田区丸の内グラントウキョウサウスタワー（２６階）...
- timeout
- */
+const crawl = () =>
+  getGeo().then(geo =>
+    fs.writeFile(geoFilePath, JSON.stringify(geo), err => {
+      if (err) throw err
+    })
+  ).catch(console.error)
+
+crawl()
