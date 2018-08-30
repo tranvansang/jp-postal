@@ -24,7 +24,7 @@
     "test": "yarn mocha test.js",
     "geo": "yarn babel-node $NODE_DEBUG_OPTION geo.js",
     "build": "babel index.es.js --out-file index.js",
-    "gen-runner": "env YARN_SILENT=true yarn babel-node gen.js"
+    "gen-runner": "env YARN_SILENT=true yarn babel-node gen.js > run.sh && chmod a+x run.sh"
   },
   "dependencies": {
     "fs": "^0.0.1-security",
