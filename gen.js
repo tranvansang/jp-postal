@@ -1,8 +1,8 @@
 import 'dotenv/config'
 
-const start = 40000
-const step = 2000
-const end = 80000
+const start = parseInt(process.env.START_INDEX)
+const end = parseInt(process.env.END_INDEX)
+const step = parseInt(process.env.STEP)
 const key = process.env.GOOGLE_MAPS_API_KEY
 for(let i = start; i < end; i += step){
   const first = i
