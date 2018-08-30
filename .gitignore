@@ -5,3 +5,6 @@ ken_all.zip
 
 #editor
 .idea/
+.env
+run.sh
+yarn-error.log

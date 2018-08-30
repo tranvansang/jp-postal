@@ -12,7 +12,7 @@ There is instruction to download, rebuild and obtain the latest data from offici
 
 - Directly download and use `postal.json`
 - Or install module `jp-postal` via `npm install --save jp-postal` or `yarn add jp-postal`
-- `postal.json` maps 7 digits postal code (string format) into a map whose key is prefecture name and value is array of regions under the prefecture
+- Default export (`postal.json`) maps 7 digits postal code (string format) into a map whose key is prefecture name and value is array of regions under the prefecture
 - Some regions have same postal code. For example: postal code `4520961` is associated with 66 regions, 2 regions in different prefectures have same postal code `4980000` (2018 June 28)
 - Usage example:
 

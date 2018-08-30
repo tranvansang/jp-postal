@@ -16,20 +16,27 @@
     "日本"
   ],
   "scripts": {
-    "rebuild": "yarn install --production=false && yarn download && yarn unzip && yarn enc-convert && yarn js-convert && yarn test",
+    "rebuild": "yarn install --production=false && yarn download && yarn unzip && yarn enc-convert && yarn js-convert && yarn build && yarn test",
     "download": "wget -O ken_all.zip http://www.post.japanpost.jp/zipcode/dl/kogaki/zip/ken_all.zip",
     "unzip": "unzip -o ken_all.zip",
     "enc-convert": "iconv -f sjis -t utf8 KEN_ALL.CSV > KEN_ALL-utf8.CSV",
     "js-convert": "node convert.js",
-    "test": "yarn mocha test.js"
+    "test": "yarn mocha test.js",
+    "geo": "yarn babel-node $NODE_DEBUG_OPTION geo.js",
+    "build": "babel index.es.js --out-file index.js"
   },
   "dependencies": {
-    "csv": "^3.1.0",
     "fs": "^0.0.1-security",
     "path": "^0.12.7"
   },
   "devDependencies": {
+    "@babel/core": "^7.0.0",
+    "@babel/node": "^7.0.0",
+    "@babel/preset-env": "^7.0.0",
+    "@google/maps": "^0.5.5",
     "assert": "^1.4.1",
+    "csv": "^3.1.0",
+    "dotenv": "^6.0.0",
     "mocha": "^5.2.0"
   }
 }
