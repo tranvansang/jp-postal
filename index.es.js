@@ -7,10 +7,10 @@ export default JSON.parse(postalRaw)
 const postalExtendedRaw = fs.readFileSync(path.resolve(__dirname, 'postal-extended.json'), 'utf8')
 export const extendedPostalData = JSON.parse(postalExtendedRaw)
 
-export const geoFilePath = path.resolve(__dirname, 'geo.json')
+const geoFilePath = path.resolve(__dirname, 'geo.json')
+export const postalGeo = {}
 if (fs.existsSync(geoFilePath)) {
   const geoRaw = fs.readFileSync(geoFilePath, 'utf8')
-  module.exports.postalGeo = JSON.parse(geoRaw)
-} else {
-  module.exports.postalGeo = {}
+  for (const [key, val] of JSON.parse(geoRaw))
+    postalGeo[key] = val
 }
