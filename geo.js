@@ -14,7 +14,6 @@ const endIndex = parseInt(process.env.END_INDEX)
 console.log(`From ${startIndex} to ${endIndex}`)
 const errCountMax = 10
 const googleMapsClient = googleMaps.createClient({
-  // key: process.env.GOOGLE_MAPS_API_KEY,
   key,
   Promise,
   rate: {limit: 120000},

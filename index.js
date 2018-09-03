@@ -11,5 +11,5 @@ const geoFilePath = path.resolve(__dirname, 'geo.json');
 export const postalGeo = {};
 if (fs.existsSync(geoFilePath)) {
   const geoRaw = fs.readFileSync(geoFilePath, 'utf8');
-  for (const [key, val] of JSON.parse(geoRaw)) postalGeo[key] = val;
+  for (const [key, val] of Object.entries(JSON.parse(geoRaw))) postalGeo[key] = val;
 }
