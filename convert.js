@@ -6,7 +6,7 @@ const INPUT_FILENAME = 'KEN_ALL-utf8.CSV'
 const STANDARD_OUTPUT_FILENAME = 'postal.json'
 const EXTENDED_OUTPUT_FILENAME = 'postal-extended.json'
 
-fs.readFile(path.resolve(__dirname, INPUT_FILENAME), 'utf8', (err, rawString) =>{
+fs.readFile(path.resolve(__dirname, INPUT_FILENAME), 'utf8', (err, rawString) => {
   if (err) throw err
   csv.parse(rawString, (err, csvData) => {
     if (err) throw err
@@ -16,13 +16,20 @@ fs.readFile(path.resolve(__dirname, INPUT_FILENAME), 'utf8', (err, rawString) =>
       const postalCode = row[2]
       if (!/^[0-9]{7}$/.test(postalCode))
         throw new Error(`Postal code ${postalCode} has invalid format`)
+      if (postalCode === '6028019') {
+        postalData[postalCode] = {
+          '京都府':
+            ['京都市上京区近衛町（下長者町通室町西入、下長者町通室町東入、出水通烏丸西京都市上京区入、出水通室町東入、室町通下長者町下る、室町通出水上る、室町通出水上る京都市上京区東入）']
+        }
+        return
+      }
       const prefecture = row[6]
       const region = row[7]
       const subregion = row[8] === '以下に掲載がない場合' ? '' : row[8]
       const conbinedRegion = region + subregion
       postalData[postalCode] = {
         ...(postalData[postalCode] || {}),
-        [prefecture] : [
+        [prefecture]: [
           ...(postalData[postalCode] && postalData[postalCode][prefecture] || []),
           conbinedRegion
         ]
@@ -45,14 +52,14 @@ fs.readFile(path.resolve(__dirname, INPUT_FILENAME), 'utf8', (err, rawString) =>
     let maxPrefecturePostal
     Object.keys(postalData).forEach(postalCode => {
       const prefectureCount = Object.keys(postalData[postalCode]).length
-      if (prefectureCount > maxPrefectureCount){
+      if (prefectureCount > maxPrefectureCount) {
         maxPrefectureCount = prefectureCount
         maxPrefecturePostal = postalCode
       }
       const regionCount = Object.keys(postalData[postalCode]).reduce((acc, cur) =>
         acc + postalData[postalCode][cur].length
         , 0)
-      if (regionCount > maxRegionCount){
+      if (regionCount > maxRegionCount) {
         maxRegionCount = regionCount
         maxRegionPostal = postalCode
       }
