@@ -28,9 +28,7 @@
   },
   "dependencies": {
     "fs": "^0.0.1-security",
-    "fullwidth": "^1.2.0",
-    "path": "^0.12.7",
-    "wanakana": "^4.0.2"
+    "path": "^0.12.7"
   },
   "devDependencies": {
     "@babel/cli": "^7.0.0",
@@ -41,6 +39,8 @@
     "assert": "^1.4.1",
     "csv": "^3.1.0",
     "dotenv": "^6.0.0",
-    "mocha": "^5.2.0"
+    "fullwidth": "^1.2.0",
+    "mocha": "^5.2.0",
+    "wanakana": "^4.0.2"
   }
 }
