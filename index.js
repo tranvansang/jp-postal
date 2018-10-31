@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.postalGeo = exports.extendedPostalData = exports.default = void 0;
+exports.kanaExtended = exports.kana = exports.postalGeo = exports.extendedPostalData = exports.default = void 0;
 
 var _path = _interopRequireDefault(require("path"));
 
@@ -48,3 +48,13 @@ if (_fs.default.existsSync(geoFilePath)) {
     postalGeo[key] = val;
   }
 }
+
+var kanaRaw = _fs.default.readFileSync(_path.default.resolve(__dirname, 'kana.json'), 'utf8');
+
+var kana = JSON.parse(kanaRaw);
+exports.kana = kana;
+
+var kanaExtendedRaw = _fs.default.readFileSync(_path.default.resolve(__dirname, 'kana-extended.json'), 'utf8');
+
+var kanaExtended = JSON.parse(kanaExtendedRaw);
+exports.kanaExtended = kanaExtended;

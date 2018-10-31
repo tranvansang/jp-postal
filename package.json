@@ -28,7 +28,9 @@
   },
   "dependencies": {
     "fs": "^0.0.1-security",
-    "path": "^0.12.7"
+    "fullwidth": "^1.2.0",
+    "path": "^0.12.7",
+    "wanakana": "^4.0.2"
   },
   "devDependencies": {
     "@babel/cli": "^7.0.0",

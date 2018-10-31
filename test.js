@@ -1,5 +1,8 @@
 var assert = require('assert')
-const postal = require('./postal.json')
+const postal = require('./index').default
+const extendedPostalData = require('./index').extendedPostalData
+const kana = require('./index').kana
+const kanaExtended = require('./index').kanaExtended
 
 const testPostal = [
   ['1130021', {"東京都":["文京区本駒込"]}],
@@ -13,8 +16,8 @@ const testExtendedPostal = [
   }],
   ['0040000', {
     "北海道": {
-      "札幌市": ["厚別区"],
-      "札幌市": ["清田区"]
+     '札幌市厚別区': [],
+     '札幌市清田区': []
     }
   }],
   ['4980000', {
@@ -22,26 +25,38 @@ const testExtendedPostal = [
       "弥富市": []
     },
     "三重県":{
-      "桑名郡": ["木曽岬町"]
+      "桑名郡木曽岬町": []
     }
   }]
 ]
 describe('Postal data', () =>
-  testPostal.forEach(([postalCode, postalData]) =>
-    describe(`Test postal code ${postalCode}`, () =>
-      it('should return correct postal data', () =>
-        assert.deepStrictEqual(postal[postalCode], postalData)
-      )
+  it('should return correct postal data', () =>
+    testPostal.forEach(([postalCode, postalData]) =>
+      assert.deepStrictEqual(postal[postalCode], postalData)
     )
   )
 )
 
 describe('Extended postal data', () =>
-  testPostal.forEach(([postalCode, extendedPostalData]) =>
-    describe(`Test postal code ${postalCode}`, () =>
-      it('should return correct extended postal data', () =>
-        assert.deepStrictEqual(postal[postalCode], extendedPostalData)
-      )
+  it('should return correct extended postal data', () =>
+    testExtendedPostal.forEach(([postalCode, postalData]) =>
+      assert.deepStrictEqual(extendedPostalData[postalCode], postalData)
     )
   )
 )
+
+describe('kana', () => {
+  it('should test kana', () => {
+    [
+      ['東京都', 'Toukyouto'],
+      ['札幌市中央区双子山', 'Sapporoshichuuouku Futagoyama'],
+      ['札幌市中央区大通西（２０〜２８丁目）', 'Sapporoshichuuouku Oodoorinishi(20-28choume)']
+    ].forEach(([kanji, romaji]) => assert.deepStrictEqual(romaji, kana[kanji]))
+    ;[
+      ['東京都', 'Toukyouto'],
+      ['札幌市中央区', 'Sapporoshichuuouku'],
+      ['双子山', 'Futagoyama'],
+      ['北一条西（１〜１９丁目）', 'Kita1jounishi(1-19choume)']
+    ].forEach(([kanji, romaji]) => assert.deepStrictEqual(romaji, kanaExtended[kanji]))
+  })
+})
