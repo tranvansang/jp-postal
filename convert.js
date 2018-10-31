@@ -68,10 +68,10 @@ fs.readFile(path.resolve(__dirname, INPUT_FILENAME), 'utf8', (err, rawString) =>
     console.log(`Postal code ${maxPrefecturePostal} is associated with ${maxPrefectureCount} prefectures`)
     const postalCodeCount = Object.keys(postalData).length
     console.log(`${csvData.length} records has been proceed to obtain ${postalCodeCount} postal code`)
-    fs.writeFile(path.resolve(__dirname, STANDARD_OUTPUT_FILENAME), JSON.stringify(postalData), err => {
+    fs.writeFile(path.resolve(__dirname, STANDARD_OUTPUT_FILENAME), JSON.stringify(postalData, null, 2), err => {
       if (err) throw err
     })
-    fs.writeFile(path.resolve(__dirname, EXTENDED_OUTPUT_FILENAME), JSON.stringify(extendedPostalData), err => {
+    fs.writeFile(path.resolve(__dirname, EXTENDED_OUTPUT_FILENAME), JSON.stringify(extendedPostalData, null, 2), err => {
       if (err) throw err
     })
   })
