@@ -10,3 +10,10 @@ archive.tar.bz2
 !kana-extended.json
 *.js
 !index.js
+node_modules
+
+#editor
+.idea/
+.env
+run.sh
+yarn-error.log
