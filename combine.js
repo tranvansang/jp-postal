@@ -25,7 +25,7 @@ const join = () => {
   }
   fs.writeFile(
     path.resolve(__dirname, 'geo.json'),
-    JSON.stringify(jpPostal),
+    JSON.stringify(jpPostal, null, 2),
     err => {
       if (err) throw err
     })
