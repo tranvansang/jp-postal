@@ -14,6 +14,8 @@ node_modules
 
 #editor
 .idea/
+
 .env
+.env.sample
 run.sh
 yarn-error.log
