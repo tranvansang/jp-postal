@@ -60,10 +60,10 @@ fs.readFile(path.resolve(__dirname, INPUT_FILENAME), 'utf8', (err, rawString) =>
       }
       const prefectureKana = row[index.prefectureKana]
       const regionKana = row[index.regionKana]
-      const subregionKana = row[index.subregionKana]
+      const subregionKana = row[index.subregionKana].toLowerCase() === 'ikanikeisaiganaibaai' ? '' : row[index.subregionKana].replace('notsuginibanchigakurubaai', '')
       const prefecture = row[index.prefecture]
       const region = row[index.region]
-      const subregion = row[index.subregion] === '以下に掲載がない場合' ? '' : row[index.subregion]
+      const subregion = row[index.subregion] === '以下に掲載がない場合' ? '' : row[index.subregion].replace('の次に番地がくる場合', '')
       const combinedRegion = region + subregion
       kana[prefecture] = toRomaji(prefectureKana)
       kana[combinedRegion] = toRomaji(regionKana) + ' ' + toRomaji(subregionKana)
