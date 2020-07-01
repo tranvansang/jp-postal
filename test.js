@@ -37,7 +37,7 @@ describe('Postal data', () =>
   )
 )
 
-describe('Extended postal data', () =>
+xdescribe('Extended postal data', () =>
   it('should return correct extended postal data', () =>
     testExtendedPostal.forEach(([postalCode, postalData]) =>
       assert.deepStrictEqual(extendedPostalData[postalCode], postalData)
@@ -45,7 +45,7 @@ describe('Extended postal data', () =>
   )
 )
 
-describe('kana', () => {
+xdescribe('kana', () => {
   it('should test kana', () => {
     [
       ['東京都', 'Toukyouto'],

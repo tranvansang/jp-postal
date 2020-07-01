@@ -1,29 +1,29 @@
 const csv = require('csv')
 const fs = require('fs')
 const path = require('path')
-const wanakana = require('wanakana')
-const fullwidth = require('fullwidth').default
+// const wanakana = require('wanakana')
+// const fullwidth = require('fullwidth').default
 
 const INPUT_FILENAME = 'KEN_ALL-utf8.CSV'
 const STANDARD_OUTPUT_FILENAME = 'postal.json'
-const EXTENDED_OUTPUT_FILENAME = 'postal-extended.json'
-const KANA_OUTPUT_FILENAME = 'kana.json'
-const KANA_EXTENDED_OUTPUT_FILENAME = 'kana-extended.json'
+// const EXTENDED_OUTPUT_FILENAME = 'postal-extended.json'
+// const KANA_OUTPUT_FILENAME = 'kana.json'
+// const KANA_EXTENDED_OUTPUT_FILENAME = 'kana-extended.json'
 
-function toHalfWidth (str) {
-    return str.replace(/[Ａ-Ｚａ-ｚ０-９]/g, function(s) {return String.fromCharCode(s.charCodeAt(0) - 0xFEE0)}).replace('－', '-')
-}
+// function toHalfWidth (str) {
+//     return str.replace(/[Ａ-Ｚａ-ｚ０-９]/g, function(s) {return String.fromCharCode(s.charCodeAt(0) - 0xFEE0)}).replace('－', '-')
+// }
 
-function toFullWidth (str) {
-    return str.replace(/[A-Za-z0-9]/g, function(s) {return String.fromCharCode(s.charCodeAt(0) + 0xFEE0)})
-}
-function capitalize(str){
-  if (!str.length) return str
-  return str[0].toUpperCase() + str.slice(1)
-}
-function toRomaji(str){
-  return capitalize(toHalfWidth(wanakana.toRomaji(fullwidth(str))))
-}
+// function toFullWidth (str) {
+//     return str.replace(/[A-Za-z0-9]/g, function(s) {return String.fromCharCode(s.charCodeAt(0) + 0xFEE0)})
+// }
+// function capitalize(str){
+//   if (!str.length) return str
+//   return str[0].toUpperCase() + str.slice(1)
+// }
+// function toRomaji(str){
+//   return capitalize(toHalfWidth(wanakana.toRomaji(fullwidth(str))))
+// }
 
 const index = {
   postalCode: 2,
@@ -35,8 +35,8 @@ const index = {
   subregion: 8
 }
 
-const kana = {}
-const kanaExtended = {}
+// const kana = {}
+// const kanaExtended = {}
 
 const writeFile = (fileName, data) => fs.writeFile(path.resolve(__dirname, fileName), JSON.stringify(data, null, 2), err => {
     if (err) throw err
@@ -46,7 +46,7 @@ fs.readFile(path.resolve(__dirname, INPUT_FILENAME), 'utf8', (err, rawString) =>
   csv.parse(rawString, (err, csvData) => {
     if (err) throw err
     const postalData = {}
-    const extendedPostalData = {}
+    // const extendedPostalData = {}
     for (const row of csvData) {
       const postalCode = row[index.postalCode]
       if (!/^[0-9]{7}$/.test(postalCode))
@@ -58,11 +58,11 @@ fs.readFile(path.resolve(__dirname, INPUT_FILENAME), 'utf8', (err, rawString) =>
       const region = row[index.region]
       const subregion = row[index.subregion] === '以下に掲載がない場合' ? '' : row[index.subregion].replace('の次に番地がくる場合', '')
       const combinedRegion = region + subregion
-      kana[prefecture] = toRomaji(prefectureKana)
-      kana[combinedRegion] = toRomaji(regionKana) + ' ' + toRomaji(subregionKana)
-      kanaExtended[prefecture] = toRomaji(prefectureKana)
-      kanaExtended[region] = toRomaji(regionKana)
-      kanaExtended[subregion] = toRomaji(subregionKana)
+      // kana[prefecture] = toRomaji(prefectureKana)
+      // kana[combinedRegion] = toRomaji(regionKana) + ' ' + toRomaji(subregionKana)
+      // kanaExtended[prefecture] = toRomaji(prefectureKana)
+      // kanaExtended[region] = toRomaji(regionKana)
+      // kanaExtended[subregion] = toRomaji(subregionKana)
 
       postalData[postalCode] = {
         ...(postalData[postalCode] || {}),
@@ -71,16 +71,16 @@ fs.readFile(path.resolve(__dirname, INPUT_FILENAME), 'utf8', (err, rawString) =>
           combinedRegion
         ]
       }
-      extendedPostalData[postalCode] = {
-        ...(extendedPostalData[postalCode] || {}),
-        [prefecture]: {
-          ...(extendedPostalData[postalCode] && extendedPostalData[postalCode][prefecture] || {}),
-          [region]: [
-            ...(extendedPostalData[postalCode] && extendedPostalData[postalCode][prefecture] && extendedPostalData[postalCode][prefecture][region] || []),
-            ...(subregion ? [subregion] : [])
-          ]
-        }
-      }
+      // extendedPostalData[postalCode] = {
+      //   ...(extendedPostalData[postalCode] || {}),
+      //   [prefecture]: {
+      //     ...(extendedPostalData[postalCode] && extendedPostalData[postalCode][prefecture] || {}),
+      //     [region]: [
+      //       ...(extendedPostalData[postalCode] && extendedPostalData[postalCode][prefecture] && extendedPostalData[postalCode][prefecture][region] || []),
+      //       ...(subregion ? [subregion] : [])
+      //     ]
+      //   }
+      // }
     }
     // Do some statistics
     let maxRegionCount = 0
@@ -188,8 +188,9 @@ fs.readFile(path.resolve(__dirname, INPUT_FILENAME), 'utf8', (err, rawString) =>
     const postalCodeCount = Object.keys(postalData).length
     console.log(`${csvData.length} records have been proceed to obtain ${postalCodeCount} postal codes`)
     writeFile(STANDARD_OUTPUT_FILENAME, postalData)
-    writeFile(EXTENDED_OUTPUT_FILENAME, extendedPostalData)
-    writeFile(KANA_OUTPUT_FILENAME, kana)
-    writeFile(KANA_EXTENDED_OUTPUT_FILENAME, kanaExtended)
+		//remove support to other data
+    // writeFile(EXTENDED_OUTPUT_FILENAME, extendedPostalData)
+    // writeFile(KANA_OUTPUT_FILENAME, kana)
+    // writeFile(KANA_EXTENDED_OUTPUT_FILENAME, kanaExtended)
   })
 })
