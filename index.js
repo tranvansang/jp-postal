@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.kanaExtended = exports.kana = exports.postalGeo = exports.extendedPostalData = exports.default = void 0;
+exports.postalGeo = exports.default = void 0;
 
 var _path = _interopRequireDefault(require("path"));
 
@@ -21,14 +21,11 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var postalRaw = _fs.default.readFileSync(_path.default.resolve(__dirname, 'postal.json'), 'utf8');
 
-var _default = JSON.parse(postalRaw);
+var _default = JSON.parse(postalRaw); // const postalExtendedRaw = fs.readFileSync(path.resolve(__dirname, 'postal-extended.json'), 'utf8')
+// export const extendedPostalData = JSON.parse(postalExtendedRaw)
+
 
 exports.default = _default;
-
-var postalExtendedRaw = _fs.default.readFileSync(_path.default.resolve(__dirname, 'postal-extended.json'), 'utf8');
-
-var extendedPostalData = JSON.parse(postalExtendedRaw);
-exports.extendedPostalData = extendedPostalData;
 
 var geoFilePath = _path.default.resolve(__dirname, 'geo.json');
 
@@ -47,14 +44,7 @@ if (_fs.default.existsSync(geoFilePath)) {
 
     postalGeo[key] = val;
   }
-}
-
-var kanaRaw = _fs.default.readFileSync(_path.default.resolve(__dirname, 'kana.json'), 'utf8');
-
-var kana = JSON.parse(kanaRaw);
-exports.kana = kana;
-
-var kanaExtendedRaw = _fs.default.readFileSync(_path.default.resolve(__dirname, 'kana-extended.json'), 'utf8');
-
-var kanaExtended = JSON.parse(kanaExtendedRaw);
-exports.kanaExtended = kanaExtended;
+} // const kanaRaw = fs.readFileSync(path.resolve(__dirname, 'kana.json'), 'utf8')
+// export const kana = JSON.parse(kanaRaw)
+// const kanaExtendedRaw = fs.readFileSync(path.resolve(__dirname, 'kana-extended.json'), 'utf8')
+// export const kanaExtended = JSON.parse(kanaExtendedRaw)

@@ -51,9 +51,9 @@ fs.readFile(path.resolve(__dirname, INPUT_FILENAME), 'utf8', (err, rawString) =>
       const postalCode = row[index.postalCode]
       if (!/^[0-9]{7}$/.test(postalCode))
         throw new Error(`Postal code ${postalCode} has an invalid format`)
-      const prefectureKana = row[index.prefectureKana]
-      const regionKana = row[index.regionKana]
-      const subregionKana = row[index.subregionKana].toLowerCase() === 'ikanikeisaiganaibaai' ? '' : row[index.subregionKana].replace('notsuginibanchigakurubaai', '')
+      // const prefectureKana = row[index.prefectureKana]
+      // const regionKana = row[index.regionKana]
+      // const subregionKana = row[index.subregionKana].toLowerCase() === 'ikanikeisaiganaibaai' ? '' : row[index.subregionKana].replace('notsuginibanchigakurubaai', '')
       const prefecture = row[index.prefecture]
       const region = row[index.region]
       const subregion = row[index.subregion] === '以下に掲載がない場合' ? '' : row[index.subregion].replace('の次に番地がくる場合', '')
@@ -65,9 +65,9 @@ fs.readFile(path.resolve(__dirname, INPUT_FILENAME), 'utf8', (err, rawString) =>
       // kanaExtended[subregion] = toRomaji(subregionKana)
 
       postalData[postalCode] = {
-        ...(postalData[postalCode] || {}),
+        ...postalData[postalCode] || {},
         [prefecture]: [
-          ...(postalData[postalCode] && postalData[postalCode][prefecture] || []),
+          ...postalData[postalCode] && postalData[postalCode][prefecture] || [],
           combinedRegion
         ]
       }
@@ -177,7 +177,7 @@ fs.readFile(path.resolve(__dirname, INPUT_FILENAME), 'utf8', (err, rawString) =>
             continue
           }
           if (acc.includes('、')) throwError()
-          newRegions.push(acc)
+          newRegions.push(region)
         }
         if (acc) throwError()
         regions.splice(0, regions.length, ...newRegions)
