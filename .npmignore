@@ -2,6 +2,7 @@ KEN_ALL-utf8.CSV
 KEN_ALL.CSV
 ken_all.zip
 *.json
+logs
 !postal.json
 !postal-extended.json
 !geo.json
