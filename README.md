@@ -1,6 +1,10 @@
 # Japanese postal data from official database
 
-There is instruction to download, rebuild and obtain the latest data from official source
+There are instructions to download, rebuild and obtain the latest data from official source
+
+Latest database update: July 1, 2020
+
+更新日：2020年7月1日
 
 ## Data source and explanation
 
@@ -43,9 +47,7 @@ npm install
 npm run rebuild
 ```
 
-See `package.json` for the detail commands
-
-- `archive.tar.bz2` contains files generated/downloaded while building on 2018 June 28
+See `package.json` for the detailed commands
 
 ## Test
 

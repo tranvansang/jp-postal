@@ -1,6 +1,6 @@
 {
   "name": "jp-postal",
-  "version": "2.0.3",
+  "version": "2.1.0",
   "main": "index.js",
   "license": "MIT",
   "repository": "github:tranvansang/jp-postal",
@@ -13,7 +13,7 @@
     "郵便番号",
     "〒",
     "住所",
-    "日本"
+    "日本住所"
   ],
   "scripts": {
     "rebuild": "yarn install --production=false && yarn download && yarn unzip && yarn enc-convert && yarn js-convert && yarn build && yarn test",
@@ -37,10 +37,10 @@
     "@babel/preset-env": "^7.0.0",
     "@google/maps": "^0.5.5",
     "assert": "^1.4.1",
-    "csv": "^3.1.0",
-    "dotenv": "^6.0.0",
+    "csv": "^5.3.2",
+    "dotenv": "^8.2.0",
     "fullwidth": "^1.2.0",
-    "mocha": "^5.2.0",
+    "mocha": "^8.0.1",
     "wanakana": "^4.0.2"
   }
 }
