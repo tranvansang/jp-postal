@@ -22,7 +22,6 @@
     "enc-convert": "iconv -f sjis -t utf8 KEN_ALL.CSV > KEN_ALL-utf8.CSV",
     "js-convert": "node convert.js",
     "test": "yarn mocha test.js",
-    "geo": "yarn babel-node $NODE_DEBUG_OPTION geo.js",
     "build": "yarn babel index.es.js --out-file index.js",
     "gen-runner": "env YARN_SILENT=true yarn babel-node gen.js > run.sh && chmod a+x run.sh"
   },
