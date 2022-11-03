@@ -25,10 +25,6 @@
     "build": "yarn babel index.es.js --out-file index.js",
     "gen-runner": "env YARN_SILENT=true yarn babel-node gen.js > run.sh && chmod a+x run.sh"
   },
-  "dependencies": {
-    "fs": "^0.0.1-security",
-    "path": "^0.12.7"
-  },
   "devDependencies": {
     "@babel/cli": "^7.0.0",
     "@babel/core": "^7.0.0",
