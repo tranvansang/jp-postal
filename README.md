@@ -2,9 +2,9 @@
 
 There are instructions to download, rebuild and obtain the latest data from official source
 
-Latest database update: July 1, 2020
+Latest database update: November 2, 2022
 
-更新日：2020年7月1日
+更新日：2022年11月2日
 
 ## Data source and explanation
 
