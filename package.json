@@ -1,6 +1,6 @@
 {
   "name": "jp-postal",
-  "version": "3.1.0",
+  "version": "3.2.0",
   "main": "index.cjs",
   "license": "MIT",
   "repository": "github:tranvansang/jp-postal",
@@ -35,7 +35,7 @@
     "enc-convert": "iconv -f sjis -t utf8 KEN_ALL.CSV > KEN_ALL-utf8.CSV",
     "js-convert": "node convert.mjs",
     "test": "yarn mocha test.mjs",
-    "build": "node build.mjs"
+    "build": "./build.sh"
   },
   "devDependencies": {
     "csv": "^6.2.1"
