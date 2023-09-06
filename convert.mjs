@@ -1,6 +1,6 @@
-const csv = require('csv')
-const fs = require('fs')
-const path = require('path')
+import csv from 'csv'
+import fs from 'node:fs'
+import path from 'node:path'
 // const wanakana = require('wanakana')
 // const fullwidth = require('fullwidth').default
 

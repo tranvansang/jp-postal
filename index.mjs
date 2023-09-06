@@ -1,5 +1,5 @@
-import path from 'path'
-import fs from 'fs'
+import path from 'node:path'
+import fs from 'node:fs'
 
 const postalRaw = fs.readFileSync(path.resolve(__dirname, 'postal.json'), 'utf8')
 export default JSON.parse(postalRaw)

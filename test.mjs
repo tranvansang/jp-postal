@@ -1,4 +1,5 @@
-var assert = require('assert')
+import assert from 'assert'
+
 const postal = require('./index').default
 const extendedPostalData = require('./index').extendedPostalData
 const kana = require('./index').kana
