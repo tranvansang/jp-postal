@@ -2,9 +2,9 @@
 
 There are instructions to download, rebuild and obtain the latest data from official source
 
-Latest database update: November 2, 2022
+Latest database update: December 12, 2025
 
-更新日：2022年11月2日
+更新日：2025年12月13日
 
 ## Data source and explanation
 
@@ -21,7 +21,9 @@ Latest database update: November 2, 2022
 - Usage example:
 
 ```javascript
-const postal = require('jp-postal')
+// const postal = require('jp-postal')
+import postal from 'jp-postal'
+
 console.log(JSON.stringify(postal['1130021']))
 console.log(JSON.stringify(postal['0040000']))
 console.log(JSON.stringify(postal['4980000']))
@@ -38,12 +40,7 @@ Output
 To rebuild to obtain the latest database
 
 ```bash
-yarn
-yarn rebuild
-```
-or
-```bash
-npm install
+npm i
 npm run rebuild
 ```
 
@@ -52,5 +49,5 @@ See `package.json` for the detailed commands
 ## Test
 
 ```bash
-yarn test
+npm run test
 ```

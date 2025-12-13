@@ -1,7 +1,8 @@
 {
   "name": "jp-postal",
-  "version": "3.2.0",
+  "version": "3.3.0",
   "main": "index.cjs",
+  "type": "module",
   "license": "MIT",
   "repository": "github:tranvansang/jp-postal",
   "keywords": [
@@ -29,15 +30,12 @@
     }
   },
   "scripts": {
-    "rebuild": "yarn install --production=false && yarn download && yarn unzip && yarn enc-convert && yarn js-convert && yarn build && yarn test",
+    "rebuild": "npm i && npm run download && npm run unzip && npm run enc-convert && npm run js-convert && npm run build && npm run test",
     "download": "wget -O ken_all.zip http://www.post.japanpost.jp/zipcode/dl/kogaki/zip/ken_all.zip",
     "unzip": "unzip -o ken_all.zip",
     "enc-convert": "iconv -f sjis -t utf8 KEN_ALL.CSV > KEN_ALL-utf8.CSV",
     "js-convert": "node convert.mjs",
-    "test": "yarn mocha test.mjs",
+    "test": "node test.mjs",
     "build": "./build.sh"
-  },
-  "devDependencies": {
-    "csv": "^6.2.1"
   }
 }
