@@ -11,5 +11,7 @@ const testPostal = [
 test('Postal data should return correct postal data', () => {
 		for (const [postalCode, postalData] of testPostal)
 			assert.deepStrictEqual(postal[postalCode].map(regions => regions.slice(0, 3)), postalData)
+	for (const [postalCode, postalData] of testPostal)
+		console.log(postal[postalCode])
 	}
 )

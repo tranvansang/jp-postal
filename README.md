@@ -14,26 +14,31 @@ Latest database update: December 12, 2025
 
 ## Usage
 
-- Directly download and use `postal.json`
-- Or install module `jp-postal` via `npm install --save jp-postal` or `yarn add jp-postal`
-- Default export (`postal.json`) maps 7 digits postal code (string format) into a map whose key is prefecture name and value is array of regions under the prefecture
-- Some regions have same postal code. For example: postal code `4520961` is associated with 66 regions, 2 regions in different prefectures have same postal code `4980000` (July 1, 2020)
-- Usage example:
+```bash
+npm i jp-postal
+```
 
 ```javascript
-// const postal = require('jp-postal')
 import postal from 'jp-postal'
 
-console.log(JSON.stringify(postal['1130021']))
-console.log(JSON.stringify(postal['0040000']))
-console.log(JSON.stringify(postal['4980000']))
+
+console.log(postal['1130021'])
+// [ [ '東京都', '文京区', '本駒込', 'ﾄｳｷｮｳﾄ', 'ﾌﾞﾝｷｮｳｸ', 'ﾎﾝｺﾏｺﾞﾒ' ] ]
+
+console.log(postal['0040000'])
+// [
+// [ '北海道', '札幌市厚別区', '', 'ﾎｯｶｲﾄﾞｳ', 'ｻｯﾎﾟﾛｼｱﾂﾍﾞﾂｸ', '' ],
+// 	[ '北海道', '札幌市清田区', '', 'ﾎｯｶｲﾄﾞｳ', 'ｻｯﾎﾟﾛｼｷﾖﾀｸ', '' ]
+// ]
+
+console.log(postal['4980000'])
+// [
+// [ '愛知県', '弥富市', '', 'ｱｲﾁｹﾝ', 'ﾔﾄﾐｼ', '' ],
+// 	[ '三重県', '桑名郡木曽岬町', '', 'ﾐｴｹﾝ', 'ｸﾜﾅｸﾞﾝｷｿｻｷﾁｮｳ', '' ]
+// ]
 ```
-Output
-```
-{"東京都":["文京区本駒込"]}
-{"北海道":["札幌市厚別区","札幌市清田区"]}
-{"愛知県":["弥富市"],"三重県":["桑名郡木曽岬町"]}
-```
+
+- Default export maps 7 digits postal code (string format) into an array whose elements are array of \[prefecture, region, subregion, prefecture kana, region kana, subregion kana\]
 
 ## How to rebuild
 
@@ -43,8 +48,6 @@ To rebuild to obtain the latest database
 npm i
 npm run rebuild
 ```
-
-See `package.json` for the detailed commands
 
 ## Test
 
