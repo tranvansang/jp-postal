@@ -1,7 +1,7 @@
 import fs from 'node:fs'
 import path from 'node:path'
 
-fs.writeFileSync(path.resolve(import.meta.dirname, 'postal.json'), JSON.stringify(Object.entries(
+fs.writeFileSync(path.resolve(import.meta.dirname, 'postal.json'), JSON.stringify(
 	fs.readFileSync(path.resolve(import.meta.dirname, 'KEN_ALL-utf8.CSV'), 'utf8')
 		.split('\n')
 		.filter(Boolean)
@@ -33,4 +33,4 @@ fs.writeFileSync(path.resolve(import.meta.dirname, 'postal.json'), JSON.stringif
 			},
 			{}
 		)
-), null, 2))
+	, null, 2))
