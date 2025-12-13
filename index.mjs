@@ -1,5 +1,4 @@
--n export default 
-{
+export default {
   "1000000": {
     "東京都": [
       "千代田区"

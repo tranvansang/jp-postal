@@ -1,9 +1,9 @@
 (
-echo -n "module.exports = "
+printf "module.exports = "
 cat postal.json
 ) > index.cjs
 
 (
-echo -n "export default "
+printf "export default "
 cat postal.json
 ) > index.mjs
