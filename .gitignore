@@ -1,7 +1,1 @@
-node_modules
-
-#editor
-.idea/
-.env
-run.sh
-yarn-error.log
+node_modules/
